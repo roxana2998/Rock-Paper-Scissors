@@ -1,22 +1,42 @@
-let startAction = prompt(
-  "Hi! This is 'Rock, Paper, Scissors' game. Do you want to play?"
-).toLowerCase();
-let userInput;
-let computerChoice;
+const showWinner = document.querySelector(".show-winner");
+const showPlayerScore = document.querySelector(".player-score");
+const showComputerScore = document.querySelector(".computer-score");
+const allPara = [...document.querySelectorAll("p")];
+
+const body = document.querySelector("body");
+const div = document.createElement("div");
+div.classList.add('play_again-file');
+    const playAgainTitle = document.createElement("h2");
+    playAgainTitle.classList.add('play_again-title');
+    playAgainTitle.textContent = "Do you want to play again?";
+    
+    const playAgainButton = document.createElement("button");
+    playAgainButton.classList.add('play_again-button');
+    playAgainButton.textContent = "Yes";
+    
+    const stopPlayButton = document.createElement("button");
+    stopPlayButton.classList.add('stop_play-button');
+    stopPlayButton.textContent = "No";
+    
+    div.appendChild(playAgainTitle);
+    div.appendChild(playAgainButton);
+    div.appendChild(stopPlayButton);
+
+
+
+
 let computerScore = 0;
 let playerScore = 0;
 
-function userValidation() {
-  if (
-    userInput !== "rock" &&
-    userInput !== "paper" &&
-    userInput !== "scissors"
-  ) {
-    userInput = prompt(
-      "Please enter one of the following: Rock, Paper or Scissors."
-    ).toLowerCase();
-    userValidation();
+function checkScore() {
+  if (playerScore === 5) {
+    showWinner.textContent = "You are the winner!";
+    body.appendChild(div);
+  } else if (computerScore === 5) {
+    showWinner.textContent = "The computer is the winner!";
+    body.appendChild(div);
   }
+
 }
 
 function computerPlay() {
@@ -30,60 +50,52 @@ function computerPlay() {
   }
 }
 
-function playRound(playerChoice, computerChoice) {
+function roundEnd(winner) {
+  if (winner === "player") {
+    playerScore += 1;
+  } else if (winner === "computer") {
+    computerScore += 1;
+  }
+  showPlayerScore.textContent = `Your score is ${playerScore}.`;
+  showComputerScore.textContent = `Computer's score is ${computerScore}.`;
+  checkScore();
+}
+
+function playRound(playerChoice) {
+  let computerChoice = computerPlay();
+  console.log(computerChoice + " :computer");
+  console.log(playerChoice + " :player");
+
   if (playerChoice === "rock" && computerChoice === "paper") {
-    computerScore += 1;
-    return "You lose! Paper beats Rock.";
+    roundEnd("computer");
   } else if (playerChoice === "paper" && computerChoice === "scissors") {
-    computerScore += 1;
-    return "You lose! Scissors beat Paper.";
+    roundEnd("computer");
   } else if (playerChoice === "scissors" && computerChoice === "rock") {
-    computerScore += 1;
-    return "You lose! Rock beats Scissors.";
+    roundEnd("computer");
   } else if (playerChoice === "rock" && computerChoice === "scissors") {
-    playerScore += 1;
-    return "You win! Rock beats Scissors.";
+    roundEnd("player");
   } else if (playerChoice === "paper" && computerChoice === "rock") {
-    playerScore += 1;
-    return "You win! Paper beats Rock.";
+    roundEnd("player");
   } else if (playerChoice === "scissors" && computerChoice === "paper") {
-    playerScore += 1;
-    return "You win! Scissors beat Paper.";
+    roundEnd("player");
   } else {
-    return "It is a draw!";
+    console.log(computerScore);
+    console.log(playerScore);
   }
 }
 
-function playGame() {
-  userInput = prompt(
-    "Please enter your choice: Rock, Paper or Scissors."
-  ).toLowerCase();
+const buttons = document.querySelectorAll("button");
+buttons.forEach((button) => {
+  button.addEventListener("click", function () {
+    let playerChoice = button.textContent.toLowerCase();
+    playRound(playerChoice);
+  });
+});
 
-  userValidation();
-  computerChoice = computerPlay();
-  console.log(userInput);
-  console.log(computerChoice);
-  console.log(playRound(userInput, computerChoice));
-  console.log(playerScore);
-  console.log(computerScore);
-}
-
-function startPlay(play) {
-  if (play === "yes") {
-    playGame();
-  } else {
-    alert("We are sorry! This game has been cancelled!");
+function playAgain() {
+  for (el of allPara) {
+    el.textContent = "";
   }
-}
+  body.removeChild(div);
 
-startPlay(startAction);
-playGame();
-playGame();
-playGame();
-playGame();
-
-if (playerScore > computerScore) {
-  console.log("You are the winner!");
-} else {
-  console.log("The computer is the winner!");
 }

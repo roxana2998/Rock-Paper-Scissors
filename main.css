@@ -1,0 +1,65 @@
+* {
+ box-sizing: border-box;
+}
+
+.dropdown {
+    background-color: grey;
+
+}
+
+h1 {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.play-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 4rem auto;  
+}
+
+#play {
+    background-color: rgb(223, 156, 89);
+    color: white;
+    font-size: 1.5rem;
+    padding: 0.5rem;
+    width: 6rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+
+
+.game-options {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 3rem auto;
+
+}
+
+.option {
+    background-color: green;
+    color: white;
+    font-size: 1.2rem;
+    padding: 0.5rem;
+    width: 8rem;
+    height: 4rem;
+    border-radius: 2rem;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.option:hover,
+.option:active {
+    opacity: 0.7;
+}
+
+.play_again-file {
+    position: absolute;
+    top: 400px;
+    left: 400px;
+    z-index: 1;
+}

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rock Paper Scissors</title>
     <script src="script.js" defer></script>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="main.css" />
   </head>
   <body>
     <div class="dropdown"></div>
@@ -16,18 +16,26 @@
       <div class="play-button">
         <button id="play">Play</button>
       </div>
-     
-    <div class="game-options">
-      <button class="option" id="rock">Rock</button>
-      <button class="option" id="paper">Paper</button>
-      <button class="option" id="scissors">Scissors</button>
-    </div>
 
-    <p class="show-winner"></p>
-    <p class="player-score"></p>
-    <p class="computer-score"></p>
+      <div class="game-options">
+        <button class="option" id="rock">Rock</button>
+        <button class="option" id="paper">Paper</button>
+        <button class="option" id="scissors">Scissors</button>
+      </div>
 
+      <p class="show-winner"></p>
+      <p class="show_round-winner"></p>
+
+      <div class="icons"> 
+        <div class="show-score">
+          <img class="player-icon" src=" " alt="" />
+          <p class="player-score"></p>
+        </div>
+        <div class="show-score">
+          <img class="computer-icon" src=" " alt="" />
+          <p class="computer-score"></p>
+        </div>
+      </div>
     </main>
   </body>
-
 </html>

@@ -22,6 +22,9 @@ div.classList.add('play_again-file');
     div.appendChild(playAgainButton);
     div.appendChild(stopPlayButton);
 
+const showRoundWinner = document.querySelector(".show_round-winner");
+const showPlayerIcon = document.querySelector(".player-icon");
+const showComputerIcon = document.querySelector(".computer-icon");
 
 
 
@@ -50,12 +53,18 @@ function computerPlay() {
   }
 }
 
-function roundEnd(winner) {
+function roundEnd(winner, pc, cc) {
   if (winner === "player") {
     playerScore += 1;
+    showRoundWinner.textContent = `${pc[0].toUpperCase() + pc.slice(1)} beats ${cc}. You won this round!`;
+    showPlayerIcon.src = `./${pc}.png`;
+    showComputerIcon.src = `./${cc}.png`;
   } else if (winner === "computer") {
     computerScore += 1;
-  }
+    showRoundWinner.textContent = `${cc[0].toUpperCase() + cc.slice(1)} beats ${pc}. The computer won this round!`;
+    showPlayerIcon.src = `./${pc}.png`;
+    showComputerIcon.src = `./${cc}.png`;
+  } 
   showPlayerScore.textContent = `Your score is ${playerScore}.`;
   showComputerScore.textContent = `Computer's score is ${computerScore}.`;
   checkScore();
@@ -67,20 +76,21 @@ function playRound(playerChoice) {
   console.log(playerChoice + " :player");
 
   if (playerChoice === "rock" && computerChoice === "paper") {
-    roundEnd("computer");
+    roundEnd("computer", playerChoice, computerChoice);
   } else if (playerChoice === "paper" && computerChoice === "scissors") {
-    roundEnd("computer");
+    roundEnd("computer", playerChoice, computerChoice);
   } else if (playerChoice === "scissors" && computerChoice === "rock") {
-    roundEnd("computer");
+    roundEnd("computer", playerChoice, computerChoice);
   } else if (playerChoice === "rock" && computerChoice === "scissors") {
-    roundEnd("player");
+    roundEnd("player", playerChoice, computerChoice);
   } else if (playerChoice === "paper" && computerChoice === "rock") {
-    roundEnd("player");
+    roundEnd("player", playerChoice, computerChoice);
   } else if (playerChoice === "scissors" && computerChoice === "paper") {
-    roundEnd("player");
-  } else {
-    console.log(computerScore);
-    console.log(playerScore);
+    roundEnd("player", playerChoice, computerChoice);
+  } else if (playerChoice === computerChoice) {
+    showRoundWinner.textContent = `You both chose ${playerChoice}. It's a draw!`;
+    showPlayerIcon.src = `./${playerChoice}.png`;
+    showComputerIcon.src = `./${computerChoice}.png`;
   }
 }
 

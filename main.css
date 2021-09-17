@@ -1,73 +1,129 @@
+@font-face {
+    font-family: Gluten;
+    src: url(Gluten-VariableFont_wght.ttf);
+}
+
+:root {
+    --dark-green: #668C4A;
+    --light-green: #A6BF4B;
+    --cream-colored: #F2F0D5;
+    --orange: #F2C53D;
+    --grey: #B1B1AC;
+}
+
 * {
  box-sizing: border-box;
 }
 
-.dropdown {
-    background-color: grey;
+body {
+    background-color: var(--cream-colored);
+    font-family: 'Gluten', sans-serif;
+}
+.backdrop {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-color: rgb(180, 177, 177);
     z-index: 1;
+    opacity: 0.6;
+}
 
+main {
+    display: none;
+     width: 100%;
+    height: 100vh;
 }
 
 h1 {
     text-align: center;
-    margin-top: 3rem;
+    font-size: 3rem;
+    font-weight: 400;
+    margin-top: 5rem;
 }
+
+.start-game{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center; 
+    padding: 8vh 0;
+    
+}
+
 
 .play-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 4rem auto;  
-}
-
-#play {
-    background-color: rgb(223, 156, 89);
+    width: clamp(10rem, 10%, 20rem);
+    font-family: 'Gluten', sans-serif;
+    margin-top: 2rem;
+    background-color: var(--dark-green);
     color: white;
-    font-size: 1.5rem;
-    padding: 0.5rem;
-    width: 6rem;
+    font-size: 2.5rem;
+    padding: 1.5rem;
     border: none;
     border-radius: 0.5rem;
     cursor: pointer;
+
 }
 
+.play-button:hover,
+.play-button:active,
+.option:hover,
+.option:active {
+    background-color: var(--light-green);
+    transform: scale(1.2);
+    transition: 0.4s;
+}
+
+
+.game-image {
+    width: clamp(30rem, 40%, 50rem);  
+    margin-top: 5rem;
+
+}
 
 .game-options {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    margin: 3rem auto;
+    margin-top: 2rem;
 
 }
 
 .option {
-    background-color: green;
+    background-color: var(--dark-green);
+    font-family: 'Gluten', sans-serif;
     color: white;
-    font-size: 1.2rem;
+    font-size: 1.7rem;
     padding: 0.5rem;
-    width: 8rem;
-    height: 4rem;
+    width: clamp(12rem, 10%, 30rem);
+    height: 5rem;
     border-radius: 2rem;
     border: none;
     cursor: pointer;
     transition: 0.2s;
 }
 
-.option:hover,
-.option:active {
-    opacity: 0.7;
+.option-title {
+    text-align: center;
+    font-size: 2.3rem;
 }
 
-.show-winner {
-    text-align: center;
-    font-size: 2rem;
-    padding: 3rem;
+.thumbsUp-icon {
+    display: block;
+    width: clamp(15rem, 15%, 30rem);  
+    margin: 5rem auto;
+
 }
 
 
 .show_round-winner {
     text-align: center;
-    font-size: 1.5rem;
+    font-size: 1.7rem;
+    padding: 5rem;
 }
 
 .show-score {
@@ -75,27 +131,25 @@ h1 {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-    
 }
 
-
-
 .icons {
-    display: flex;
+    display: none;
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
-    width: 90%;
+    width: 80%;
 }
 
-img {
-    width: 20rem;
-    height: 20rem;
-    
+.player-icon {
+    width: 16rem;
+    height: 16rem;  
 }
 
 .computer-icon {
     transform: scaleX(-1);
+    width: 16rem;
+    height: 16rem;  
 }
 
 .show-score {
@@ -104,14 +158,19 @@ img {
     align-items: center;
 }
 
-.play_again-file {
-    display: none;
-    position: absolute;
-    left: 40%;
-    bottom: 50%;
-    z-index: 2;
-    background-color: rgb(248, 214, 163);
-    width: clamp(25rem, 8vw, 60rem);
-    height: 15vw;
+div p {
     text-align: center;
+    font-size: 1.3rem;
+    margin-top: 3rem;
+}
+
+.play_again-file {
+    position: absolute;
+    left: 38%;
+    bottom: 60%;
+    z-index: 2;
+    background-color: rgb(250, 250, 250);
+    width: clamp(30rem, 8vw, 60rem);
+    text-align: center;
+    padding: 2rem;
 }

@@ -1,26 +1,54 @@
-const showWinner = document.querySelector(".show-winner");
 const showPlayerScore = document.querySelector(".player-score");
 const showComputerScore = document.querySelector(".computer-score");
 const allPara = [...document.querySelectorAll("p")];
 
+
+
 const body = document.querySelector("body");
+
+const gameImage = document.createElement('img');
+gameImage.className = 'game-image';
+gameImage.src = "./game-Image.png";
+
+
+const playDiv = document.createElement("div");
+playDiv.className = 'start-game';
+    const gameTitle = document.createElement("h1");
+    gameTitle.textContent = "Welcome to Rock Paper Scissors game!";
+    const playButton = document.createElement("button");
+    playButton.className = 'play-button';
+    playButton.textContent = "Play";
+    playDiv.appendChild(gameTitle);
+    playDiv.appendChild(playButton);
+    playDiv.appendChild(gameImage);
+body.appendChild(playDiv);
+
+
+const main = document.querySelector("main");
+const icons = document.querySelector(".icons");
+
 const div = document.createElement("div");
 div.classList.add('play_again-file');
-    const playAgainTitle = document.createElement("h2");
-    playAgainTitle.classList.add('play_again-title');
-    playAgainTitle.textContent = "Do you want to play again?";
+    const showWinner = document.createElement("h2");
+    showWinner.classList.add('show-winner');
     
     const playAgainButton = document.createElement("button");
     playAgainButton.classList.add('play_again-button');
-    playAgainButton.textContent = "Yes";
+    playAgainButton.textContent = "Play again";
     
-    const stopPlayButton = document.createElement("button");
-    stopPlayButton.classList.add('stop_play-button');
-    stopPlayButton.textContent = "No";
-    
-    div.appendChild(playAgainTitle);
-    div.appendChild(playAgainButton);
-    div.appendChild(stopPlayButton);
+
+const backdrop = document.createElement("div");
+backdrop.className = 'backdrop';
+
+const optionTitle = document.createElement("p");
+optionTitle.className = 'option-title';
+optionTitle.textContent = "Hey, please choose one of the above options to start the game!";
+main.appendChild(optionTitle);
+const thumbsUpIcon = document.createElement("img");
+thumbsUpIcon.className = 'thumbsUp-icon';
+thumbsUpIcon.src = "./thumbs-up.png";
+main.appendChild(thumbsUpIcon);
+
 
 const showRoundWinner = document.querySelector(".show_round-winner");
 const showPlayerIcon = document.querySelector(".player-icon");
@@ -33,13 +61,22 @@ let playerScore = 0;
 
 function checkScore() {
   if (playerScore === 5) {
-    showWinner.textContent = "You are the winner!";
+    showWinner.textContent = "You have 5 points. You are the winner!";
+    div.appendChild(showWinner);
+    div.appendChild(playAgainButton);
+    body.appendChild(backdrop);
     body.appendChild(div);
-  } else if (computerScore === 5) {
-    showWinner.textContent = "The computer is the winner!";
-    body.appendChild(div);
-  }
+    playAgain();
+   
 
+  } else if (computerScore === 5) {
+    showWinner.textContent = "The computer has 5 points. The computer is the winner!";
+    div.appendChild(showWinner);
+    div.appendChild(playAgainButton);
+    body.appendChild(backdrop);
+    body.appendChild(div);
+    playAgain();
+  }
 }
 
 function computerPlay() {
@@ -92,20 +129,38 @@ function playRound(playerChoice) {
     showPlayerIcon.src = `./${playerChoice}.png`;
     showComputerIcon.src = `./${computerChoice}.png`;
   }
+ 
 }
 
-const buttons = document.querySelectorAll("button");
+playButton.addEventListener("click", function() {
+  playDiv.style.display = "none";
+  main.style.display = "block";
+})
+
+const buttons = document.querySelectorAll("main button");
 buttons.forEach((button) => {
   button.addEventListener("click", function () {
     let playerChoice = button.textContent.toLowerCase();
     playRound(playerChoice);
+    icons.style.display = "flex";
+    optionTitle.style.display = "none";
+    thumbsUpIcon.style.display = "none";
+
   });
 });
 
-function playAgain() {
-  for (el of allPara) {
-    el.textContent = "";
-  }
-  body.removeChild(div);
 
+
+function playAgain() {
+  playAgainButton.addEventListener("click", function() {
+    body.removeChild(div);
+    body.removeChild(backdrop);
+    computerScore = 0;
+    playerScore = 0;
+    for (el of allPara) {
+      el.textContent = "";
+    }    
+    icons.style.display = "none";
+  });
 }
+

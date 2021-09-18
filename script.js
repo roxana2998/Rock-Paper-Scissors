@@ -67,6 +67,8 @@ function checkScore() {
     body.appendChild(backdrop);
     body.appendChild(div);
     playAgain();
+    setTimeout(() => {div.style.transform = "translateY(3rem)"}, 1);
+    
    
 
   } else if (computerScore === 5) {
@@ -75,7 +77,10 @@ function checkScore() {
     div.appendChild(playAgainButton);
     body.appendChild(backdrop);
     body.appendChild(div);
+
     playAgain();
+    setTimeout(() => {div.style.transform = "translateY(3rem)"}, 1);
+
   }
 }
 
@@ -161,6 +166,8 @@ function playAgain() {
       el.textContent = "";
     }    
     icons.style.display = "none";
+    optionTitle.style.display = "block";
+    thumbsUpIcon.style.display = "block";
   });
 }
 
